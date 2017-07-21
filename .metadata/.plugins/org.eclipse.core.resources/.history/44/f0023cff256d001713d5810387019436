@@ -1,0 +1,19 @@
+import java.awt.*;
+import javax.swing.*;
+
+public class CustomizeSize extends JFrame {
+	public static final long serialVersionUID = 2L;
+	
+	private TipPanel tipPanel = new TipPanel();
+	private JPanel custom = new JPanel(new FlowLayout());
+	
+	private JLabel name1 = new JLabel("width");
+	private JLabel name2 = new JLabel("height");
+	
+	private JTextField input1 = new JTextField(4),
+			input2 = new JTextField(4);
+	
+	private JButton button = new JButton("confirm");
+	
+	
+}

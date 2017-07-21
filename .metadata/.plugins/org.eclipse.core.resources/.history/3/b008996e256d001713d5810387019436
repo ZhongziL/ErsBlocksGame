@@ -1,0 +1,8 @@
+import javax.swing.*;
+
+public class CustomizeSize extends JFrame {
+	private TipPanel tipPanel = new TipPanel();
+	private JPanel custom = new JPanel(new FlowLayout());
+	
+	private JLabel name1 = new JLabel("宽");
+}
