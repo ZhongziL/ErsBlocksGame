@@ -1,0 +1,70 @@
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.EtchedBorder;
+import javax.swing.text.html.StyleSheet;
+
+public class CustomizeColor extends JFrame {
+	private TipPanel tipPanel = new TipPanel();
+	
+	private JPanel panel = new JPanel(new BorderLayout());
+	private JLabel label = new JLabel();
+	
+	private String[] patternExamples = {"red", "black", "white", "green"};
+	private StyleSheet convertTool = new StyleSheet();
+	private Color currentPattern = convertTool.stringToColor(patternExamples[0]);
+	private JComboBox patternList;
+	private Border border = new EtchedBorder(EtchedBorder.RAISED, Color.white, new Color(148,145,140));
+	
+	public CustomizeColor(String title) {
+		super(title);
+		tipPanel.setSize(400, 400);
+		setSize(400,460);
+		label.setText("change color");
+		patternList = new JComboBox(patternExamples);
+		patternList.setEditable(true);
+		tipPanel.setFrontColor(currentPattern);
+		
+		panel.add("North", label);
+		panel.add("Center", patternList);
+		
+		setLayout(new BorderLayout());
+		add("North", panel);
+		add("Center", tipPanel);
+		
+		Dimension scrSize = Toolkit.getDefaultToolkit().getScreenSize();
+		setLocation((scrSize.width-getSize().width)/2,(scrSize.height-getSize().height)/2);
+		
+		tipPanel.setStyle(0x00f0);
+		
+		patternList.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent ae) {
+				JComboBox cb = (JComboBox)ae.getSource();
+				String newSelection = (String)cb.getSelectedItem();
+				Color color = convertTool.stringToColor(newSelection);
+				tipPanel.setFrontColor(color);
+				repaint();
+			}
+		});
+		
+		addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent we) {
+				System.exit(0);
+			}
+		});
+		
+		addComponentListener(new ComponentAdapter() {
+			public void componentResized(ComponentEvent ce) {
+				tipPanel.fanning();
+			}
+		});
+		
+		this.setVisible(true);
+		tipPanel.fanning();
+	}
+	
+	public static void main(String[] args) {
+		new CustomizeColor("change color");
+	}
+}

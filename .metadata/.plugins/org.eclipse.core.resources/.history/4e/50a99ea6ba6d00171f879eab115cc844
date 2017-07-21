@@ -36,10 +36,6 @@ public class TipPanel extends JPanel {
 		this.isTiled = tiled;
 	}
 	
-	public void setFrontColor(Color color) {
-		this.frontColor = color;
-	}
-	
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		if (!isTiled) fanning();
